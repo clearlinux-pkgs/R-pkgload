@@ -1,5 +1,6 @@
 1.0.0
-R-rprojroot
+R-assertthat
 R-desc
-R-rstudioapi
 R-pkgbuild
+R-rprojroot
+R-rstudioapi

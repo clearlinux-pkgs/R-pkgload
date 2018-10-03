@@ -4,17 +4,15 @@
 #
 Name     : R-pkgload
 Version  : 1.0.0
-Release  : 1
+Release  : 2
 URL      : https://cran.r-project.org/src/contrib/pkgload_1.0.0.tar.gz
 Source0  : https://cran.r-project.org/src/contrib/pkgload_1.0.0.tar.gz
 Summary  : Simulate Package Installation and Attach
 Group    : Development/Tools
 License  : GPL-2.0 GPL-2.0+ GPL-3.0
-Requires: R-pkgload-lib
-Requires: R-desc
-Requires: R-pkgbuild
-Requires: R-rprojroot
-Requires: R-rstudioapi
+Requires: R-pkgload-lib = %{version}-%{release}
+Requires: R-assertthat
+BuildRequires : R-assertthat
 BuildRequires : R-desc
 BuildRequires : R-pkgbuild
 BuildRequires : R-rprojroot
@@ -41,11 +39,11 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1532898690
+export SOURCE_DATE_EPOCH=1538581273
 
 %install
 rm -rf %{buildroot}
-export SOURCE_DATE_EPOCH=1532898690
+export SOURCE_DATE_EPOCH=1538581273
 export LANG=C
 export CFLAGS="$CFLAGS -O3 -flto -fno-semantic-interposition "
 export FCFLAGS="$CFLAGS -O3 -flto -fno-semantic-interposition "
