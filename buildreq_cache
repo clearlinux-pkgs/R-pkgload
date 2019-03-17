@@ -1,5 +1,7 @@
 1.0.2
 R-assertthat
+R-backports
+R-cli
 R-desc
 R-pkgbuild
 R-rlang
