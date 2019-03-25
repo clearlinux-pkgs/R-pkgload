@@ -4,7 +4,7 @@
 #
 Name     : R-pkgload
 Version  : 1.0.2
-Release  : 10
+Release  : 11
 URL      : https://cran.r-project.org/src/contrib/pkgload_1.0.2.tar.gz
 Source0  : https://cran.r-project.org/src/contrib/pkgload_1.0.2.tar.gz
 Summary  : Simulate Package Installation and Attach
@@ -44,10 +44,10 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1552875449
+export SOURCE_DATE_EPOCH=1553528231
 
 %install
-export SOURCE_DATE_EPOCH=1552875449
+export SOURCE_DATE_EPOCH=1553528231
 rm -rf %{buildroot}
 export LANG=C
 export CFLAGS="$CFLAGS -O3 -flto -fno-semantic-interposition "
