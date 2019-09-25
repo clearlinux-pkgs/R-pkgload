@@ -4,16 +4,19 @@
 #
 Name     : R-pkgload
 Version  : 1.0.2
-Release  : 15
+Release  : 16
 URL      : https://cran.r-project.org/src/contrib/pkgload_1.0.2.tar.gz
 Source0  : https://cran.r-project.org/src/contrib/pkgload_1.0.2.tar.gz
 Summary  : Simulate Package Installation and Attach
 Group    : Development/Tools
-License  : GPL-2.0 GPL-2.0+ GPL-3.0
+License  : GPL-3.0
 Requires: R-pkgload-lib = %{version}-%{release}
-BuildRequires : R-assertthat
-BuildRequires : R-backports
-BuildRequires : R-cli
+Requires: R-desc
+Requires: R-pkgbuild
+Requires: R-rlang
+Requires: R-rprojroot
+Requires: R-rstudioapi
+Requires: R-withr
 BuildRequires : R-desc
 BuildRequires : R-pkgbuild
 BuildRequires : R-rlang
@@ -23,10 +26,8 @@ BuildRequires : R-withr
 BuildRequires : buildreq-R
 
 %description
-# pkgload
-[![Travis-CI Build Status](https://travis-ci.org/r-lib/pkgload.svg?branch=master)](https://travis-ci.org/r-lib/pkgload)
-[![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/r-lib/pkgload?branch=master&svg=true)](https://ci.appveyor.com/project/r-lib/pkgload)
-[![codecov](https://codecov.io/gh/r-lib/pkgload/branch/master/graph/badge.svg)](https://codecov.io/gh/r-lib/pkgload)
+and then attaching it. This is a key part of the 'devtools' package as it
+    allows you to rapidly iterate while developing a package.
 
 %package lib
 Summary: lib components for the R-pkgload package.
@@ -43,13 +44,13 @@ lib components for the R-pkgload package.
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-export LANG=C
-export SOURCE_DATE_EPOCH=1553528231
+export LANG=C.UTF-8
+export SOURCE_DATE_EPOCH=1569384341
 
 %install
-export SOURCE_DATE_EPOCH=1553528231
+export SOURCE_DATE_EPOCH=1569384341
 rm -rf %{buildroot}
-export LANG=C
+export LANG=C.UTF-8
 export CFLAGS="$CFLAGS -O3 -flto -fno-semantic-interposition "
 export FCFLAGS="$CFLAGS -O3 -flto -fno-semantic-interposition "
 export FFLAGS="$CFLAGS -O3 -flto -fno-semantic-interposition "
@@ -78,12 +79,12 @@ R CMD INSTALL --preclean --install-tests --built-timestamp=${SOURCE_DATE_EPOCH} 
 cp ~/.stash/* %{buildroot}/usr/lib64/R/library/*/libs/ || :
 %{__rm} -rf %{buildroot}%{_datadir}/R/library/R.css
 %check
-export LANG=C
+export LANG=C.UTF-8
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export _R_CHECK_FORCE_SUGGESTS_=false
-R CMD check --no-manual --no-examples --no-codoc  pkgload || :
+R CMD check --no-manual --no-examples --no-codoc pkgload || :
 
 
 %files
