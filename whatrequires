@@ -1,5 +1,5 @@
 # This file contains recursive sources that require this package
 R-devtools
 R-generics
-R-pkgdown
 R-roxygen2
+R-testthat

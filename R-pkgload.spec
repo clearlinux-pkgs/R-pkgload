@@ -4,7 +4,7 @@
 #
 Name     : R-pkgload
 Version  : 1.0.2
-Release  : 18
+Release  : 19
 URL      : https://cran.r-project.org/src/contrib/pkgload_1.0.2.tar.gz
 Source0  : https://cran.r-project.org/src/contrib/pkgload_1.0.2.tar.gz
 Summary  : Simulate Package Installation and Attach
@@ -24,6 +24,7 @@ BuildRequires : R-rprojroot
 BuildRequires : R-rstudioapi
 BuildRequires : R-withr
 BuildRequires : buildreq-R
+Patch1: fix-bootstrap.patch
 
 %description
 and then attaching it. This is a key part of the 'devtools' package as it
@@ -39,21 +40,23 @@ lib components for the R-pkgload package.
 
 %prep
 %setup -q -c -n pkgload
+cd %{_builddir}/pkgload
+%patch1 -p1
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1569384341
+export SOURCE_DATE_EPOCH=1589756543
 
 %install
-export SOURCE_DATE_EPOCH=1569384341
+export SOURCE_DATE_EPOCH=1589756543
 rm -rf %{buildroot}
 export LANG=C.UTF-8
 export CFLAGS="$CFLAGS -O3 -flto -fno-semantic-interposition "
-export FCFLAGS="$CFLAGS -O3 -flto -fno-semantic-interposition "
-export FFLAGS="$CFLAGS -O3 -flto -fno-semantic-interposition "
+export FCFLAGS="$FFLAGS -O3 -flto -fno-semantic-interposition "
+export FFLAGS="$FFLAGS -O3 -flto -fno-semantic-interposition "
 export CXXFLAGS="$CXXFLAGS -O3 -flto -fno-semantic-interposition "
 export AR=gcc-ar
 export RANLIB=gcc-ranlib

@@ -1,0 +1,36 @@
+This change eases the bootstrap of `pkgload` when updating to new R major
+versions (e.g. 3.* -> 4.*), since a function from `testthat` is being
+referenced, though `pkgload` must be built before `testthat`.
+
+The patch was taken from a comment in the upstream issue tracker to address a
+different issue:
+
+https://github.com/r-lib/pkgload/issues/89#issuecomment-457904693
+
+(Note that a different approach to resolve this issue would be to remove
+`testthat` from the distro, since it is almost always an optional dependency,
+but then we would be running fewer package tests in general...)
+
+
+diff -ru pkgload~/pkgload/R/zzz.r pkgload/pkgload/R/zzz.r
+--- pkgload~/pkgload/R/zzz.r	2018-10-11 12:09:48.000000000 -0700
++++ pkgload/pkgload/R/zzz.r	2020-05-17 15:42:58.829019538 -0700
+@@ -10,12 +10,12 @@
+   assign("desc_desc_get", desc::desc_get, envir = env)
+   assign("desc_desc_get_version", desc::desc_get_version, envir = env)
+   assign("rprojroot_find_root", rprojroot::find_root, envir = env)
+-  if (is_installed("testthat")) {
+-    assign("testthat_source_test_helpers", testthat::source_test_helpers, envir = env)
+-  } else {
+-    assign("testthat_source_test_helpers", function(...) TRUE, envir = env)
+-  }
+-
++  tryCatch(
++    assign("testthat_source_test_helpers", testthat::source_test_helpers, envir = env),
++    error = function(e) {
++      assign("testthat_source_test_helpers", function(...) TRUE, envir = env) 
++    }
++  )
+ 
+   nms <- environment(onload_assign)$names
+   funs <- environment(onload_assign)$funs
