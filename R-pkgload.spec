@@ -4,7 +4,7 @@
 #
 Name     : R-pkgload
 Version  : 1.2.4
-Release  : 37
+Release  : 38
 URL      : https://cran.r-project.org/src/contrib/pkgload_1.2.4.tar.gz
 Source0  : https://cran.r-project.org/src/contrib/pkgload_1.2.4.tar.gz
 Summary  : Simulate Package Installation and Attach
