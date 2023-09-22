@@ -4,10 +4,10 @@
 # Using build pattern: R
 #
 Name     : R-pkgload
-Version  : 1.3.2.1
-Release  : 49
-URL      : https://cran.r-project.org/src/contrib/pkgload_1.3.2.1.tar.gz
-Source0  : https://cran.r-project.org/src/contrib/pkgload_1.3.2.1.tar.gz
+Version  : 1.3.3
+Release  : 50
+URL      : https://cran.r-project.org/src/contrib/pkgload_1.3.3.tar.gz
+Source0  : https://cran.r-project.org/src/contrib/pkgload_1.3.3.tar.gz
 Summary  : Simulate Package Installation and Attach
 Group    : Development/Tools
 License  : GPL-3.0
@@ -16,6 +16,7 @@ Requires: R-crayon
 Requires: R-desc
 Requires: R-fs
 Requires: R-glue
+Requires: R-pkgbuild
 Requires: R-rlang
 Requires: R-rprojroot
 Requires: R-withr
@@ -24,6 +25,7 @@ BuildRequires : R-crayon
 BuildRequires : R-desc
 BuildRequires : R-fs
 BuildRequires : R-glue
+BuildRequires : R-pkgbuild
 BuildRequires : R-rlang
 BuildRequires : R-rprojroot
 BuildRequires : R-withr
@@ -47,10 +49,10 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1689008845
+export SOURCE_DATE_EPOCH=1695396105
 
 %install
-export SOURCE_DATE_EPOCH=1689008845
+export SOURCE_DATE_EPOCH=1695396105
 rm -rf %{buildroot}
 export LANG=C.UTF-8
 export CFLAGS="$CFLAGS -O3 -flto -fno-semantic-interposition "
@@ -138,6 +140,7 @@ R CMD check --no-manual --no-examples --no-codoc . || :
 /usr/lib64/R/library/pkgload/tests/testthat/test-load-hooks.R
 /usr/lib64/R/library/pkgload/tests/testthat/test-load.R
 /usr/lib64/R/library/pkgload/tests/testthat/test-metadata.R
+/usr/lib64/R/library/pkgload/tests/testthat/test-namespace-env.R
 /usr/lib64/R/library/pkgload/tests/testthat/test-namespace.R
 /usr/lib64/R/library/pkgload/tests/testthat/test-package.R
 /usr/lib64/R/library/pkgload/tests/testthat/test-po.R
@@ -146,6 +149,9 @@ R CMD check --no-manual --no-examples --no-codoc . || :
 /usr/lib64/R/library/pkgload/tests/testthat/test-s4-unload.R
 /usr/lib64/R/library/pkgload/tests/testthat/test-shim.R
 /usr/lib64/R/library/pkgload/tests/testthat/test-source.R
+/usr/lib64/R/library/pkgload/tests/testthat/testActiveBindings/DESCRIPTION
+/usr/lib64/R/library/pkgload/tests/testthat/testActiveBindings/NAMESPACE
+/usr/lib64/R/library/pkgload/tests/testthat/testActiveBindings/R/bindings.r
 /usr/lib64/R/library/pkgload/tests/testthat/testCollateAbsent/DESCRIPTION
 /usr/lib64/R/library/pkgload/tests/testthat/testCollateAbsent/R/a.r
 /usr/lib64/R/library/pkgload/tests/testthat/testCollateAbsent/R/b.r
@@ -284,4 +290,5 @@ R CMD check --no-manual --no-examples --no-codoc . || :
 /usr/lib64/R/library/pkgload/tests/testthat/testUserLoadHookUpstream/DESCRIPTION
 /usr/lib64/R/library/pkgload/tests/testthat/testUserLoadHookUpstream/NAMESPACE
 /usr/lib64/R/library/pkgload/tests/testthat/testUserLoadHookUpstream/R/testUserLoadHookUpstream.R
+/usr/lib64/R/library/pkgload/tests/testthat/testVersionSep/DESCRIPTION
 /usr/lib64/R/library/pkgload/tests/wipe.R
